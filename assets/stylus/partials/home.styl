@@ -1,0 +1,95 @@
+body
+    margin-left 0
+    margin-right 0
+    //width 100%
+    height 100vh
+    background-image url('/bomberman/assets/img/background.png')
+    background-position left bottom
+    background-repeat no-repeat
+    //background-size contain
+    text-align center
+    
+    .header
+        width 100%
+        height 50px
+        background none
+        padding 20px 20px 20px 20px
+        text-align left
+    
+.player
+    position absolute
+    top 0
+    left 0
+    width 30px
+    height 30px
+    background-color none
+    z-index 10
+    transform translateX(0) translateY(0)
+    transition all 0.1s ease-in
+    background-image url('/bomberman-v2/assets/img/avatar.svg')
+    background-size contain
+    
+.game-set
+    display inline-block
+    position relative
+    width auto
+    height auto
+    margin 0 auto
+    background #9BAAC3
+    font-size 0
+    
+.brick
+    display inline-block
+    width 30px
+    height 30px
+    top 0
+    left 0
+    background-color #5F7292
+    //transform translateX(0) translateY(0)
+    //background-image url('/bomberman/assets/img/brick.svg')
+    //background-size contain
+
+.empty
+    display inline-block
+    width 30px
+    height 30px
+    top 0
+    left 0
+    background-color #5F7292
+    //transform translateX(0) translateY(0)
+    //background-image url('/bomberman/assets/img/brick.svg')
+    //background-size contain
+    
+.set-line
+    display block
+    position relative
+    margin 0 auto
+    background red
+    
+.wall
+    display inline-block
+    width 30px
+    height 30px
+    top 0
+    left 0
+    background-color #5F7292
+    //transform translateX(0) translateY(0)
+    background-image url('/bomberman-v2/assets/img/brick.svg')
+    background-size contain
+    
+.breakable
+    //background-color green
+    //transform translateX(0) translateY(0)
+    background-image url('/bomberman-v2/assets/img/breakable.svg')
+    background-size contain
+    
+.bomb
+    display inline-block
+    width 30px
+    height 30px
+    top 0
+    left 0
+    background-color #5F7292
+    transform translateX(0) translateY(0)
+    background-image url('/bomberman-v2/assets/img/bomb.svg')
+    background-size contain

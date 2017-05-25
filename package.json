@@ -1,0 +1,29 @@
+{
+  "name": "Bomberman",
+  "version": "2.0.0",
+  "description": "This is a version of Bomberman with a new theme.",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-stylus": "^2.6.0",
+    "gulp-uglify": "^2.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samuelmormin/bomberman.git"
+  },
+  "bugs": {
+    "url": "https://github.com/samuelmormin/bomberman/issues"
+  },
+  "homepage": "https://github.com/samuelmormin/bomberman#readme"
+}
