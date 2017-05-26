@@ -2,11 +2,13 @@
 // It also handles the interactions with the game-set(bombs, destroying walls...)
 var player = function(posX, posY, index_i, index_j, size)
 {
-    this.posX       = posX;
-    this.posY       = posY;
-    this.index_i    = 1;
-    this.index_j    = 1;
-    this.size       = size;
+    this.posX           = posX;
+    this.posY           = posY;
+    this.index_i        = 1;
+    this.index_j        = 1;
+    this.size           = size;
+    this.bomb_dropped   = [];
+    this.life           = 3;
     
     // Creates and displays the player dom element
     this.generate_player = function()
@@ -59,6 +61,7 @@ var player = function(posX, posY, index_i, index_j, size)
                 {
                     _this.index_j += 1;
                     _this.create_player.style.transform = 'translateX('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posX +'px) translateY('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posY +'px)';
+                    _this.create_player.classList.add("animation-right");
                 }
             }
             
@@ -89,13 +92,37 @@ var player = function(posX, posY, index_i, index_j, size)
             
             if( keyValue == 32 )
             {
-            if(displayed_set.bricks_properties[_this.index_i][_this.index_j+1].breakable == true)
-            {
-                console.log('put bomb');
-                _this.bomb_dropped = document.createElement("div");
-                _this.bomb_dropped.classList.add("bomb");
-                document.querySelector(".game-set");
-            }
+                var bomb_index_i = _this.index_i;
+                var bomb_index_j = _this.index_j;
+                var bomb_dropped = document.createElement("div");
+                bomb_dropped.classList.add("bomb");
+                bomb_dropped.style.transform = 'translateX('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posX +'px) translateY('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posY +'px)';
+                _this.bomb_dropped.push(bomb_dropped);
+                document.querySelector(".game-set").appendChild(bomb_dropped);
+                
+                
+                if(displayed_set.bricks_properties[_this.index_i][_this.index_j+1].breakable == true)
+                {
+                    setTimeout(function()
+                    {
+                        console.log(_this);
+                        displayed_set.bricks_properties[bomb_index_i][bomb_index_j+1].breakable = null;                        //displayed_set.bricks_properties[_this.index_i][_this.index_j+1].classList.remove("breakable");
+                        displayed_set.bricks_properties[bomb_index_i][bomb_index_j+1].element.classList.remove("breakable");
+                        displayed_set.bricks_properties[bomb_index_i][bomb_index_j+1].element.classList.add("empty");
+                        document.querySelector(".game-set").removeChild(bomb_dropped);
+                    }, 3000);
+                }
+                else if(displayed_set.bricks_properties[_this.index_i+1][_this.index_j].breakable == true)
+                {
+                    setTimeout(function()
+                    {
+                        console.log(_this);
+                        displayed_set.bricks_properties[bomb_index_i+1][bomb_index_j].breakable = null;                        //displayed_set.bricks_properties[_this.index_i][_this.index_j+1].classList.remove("breakable");
+                        displayed_set.bricks_properties[bomb_index_i+1][bomb_index_j].element.classList.remove("breakable");
+                        displayed_set.bricks_properties[bomb_index_i+1][bomb_index_j].element.classList.add("empty");
+                        document.querySelector(".game-set").removeChild(bomb_dropped);
+                    }, 3000);
+                }
             }
             
         });
