@@ -10,6 +10,3 @@
     
 </head>
 <body>
-    <div class="header">
-        <img src="<?= URL ?>assets/img/logo.png" alt="">
-    </div>

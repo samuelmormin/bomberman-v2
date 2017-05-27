@@ -6,13 +6,17 @@ include 'config.php';
 // Routing
 $q = !empty($_GET['q']) ? $_GET['q'] : '';
 
-if($q === '' || $q === 'home')
+if($q === '' || $q === 'start_play')
 {
-    $page = 'home';
+    $page = 'start_play';
 }
 else if($q === 'credits')
 {
     $page = 'credits';
+}
+else if($q === 'home')
+{
+    $page = 'home';
 }
 
 else
