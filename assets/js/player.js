@@ -41,6 +41,7 @@ var player = function(posX, posY, index_i, index_j, size)
                 {
                     _this.index_j -= 1;
                     _this.create_player.style.transform = 'translateX('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posX +'px) translateY('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posY +'px)';
+                    _this.create_player.className = "player animation-left";
                 }
             }
             
@@ -51,6 +52,7 @@ var player = function(posX, posY, index_i, index_j, size)
                 {
                     _this.index_i -= 1;
                     _this.create_player.style.transform = 'translateX('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posX +'px) translateY('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posY +'px)';
+                    _this.create_player.className = "player animation-up";
                 }
             }
             
@@ -61,7 +63,7 @@ var player = function(posX, posY, index_i, index_j, size)
                 {
                     _this.index_j += 1;
                     _this.create_player.style.transform = 'translateX('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posX +'px) translateY('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posY +'px)';
-                    _this.create_player.classList.add("animation-right");
+                    _this.create_player.className = "player animation-right";
                 }
             }
             
@@ -72,67 +74,64 @@ var player = function(posX, posY, index_i, index_j, size)
                 {
                     _this.index_i += 1;
                     _this.create_player.style.transform = 'translateX('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posX +'px) translateY('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posY +'px)';
+                    _this.create_player.className = "player animation-down";
                 }
             }
         });
     }
     
+    
+    
+    
+    
+    
+    console.log('ok1'); 
     // Drop a bomb
     this.drop_bomb = function()
     {
         // stock the current element
         var _this = this;
-        
+        console.log('ok2');
         // callback to listen the events
         document.addEventListener("keydown", function()
         {
             // space Key value = 32
             keyValue = event.keyCode;
-            console.log(keyValue);
+//            console.log(keyValue);
             
             if( keyValue == 32 )
             {
                 var bomb_index_i = _this.index_i;
                 var bomb_index_j = _this.index_j;
                 var bomb_dropped = document.createElement("div");
-                bomb_dropped.classList.add("bomb");
+                bomb_dropped.className = "bomb animation-bomb";
                 bomb_dropped.style.transform = 'translateX('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posX +'px) translateY('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posY +'px)';
                 _this.bomb_dropped.push(bomb_dropped);
                 document.querySelector(".game-set").appendChild(bomb_dropped);
                 
                 
-                if(displayed_set.bricks_properties[_this.index_i][_this.index_j+1].breakable == true)
-                {
-                    setTimeout(function()
-                    {
-                        console.log(_this);
-                        displayed_set.bricks_properties[bomb_index_i][bomb_index_j+1].breakable = null;                        //displayed_set.bricks_properties[_this.index_i][_this.index_j+1].classList.remove("breakable");
-                        displayed_set.bricks_properties[bomb_index_i][bomb_index_j+1].element.classList.remove("breakable");
-                        displayed_set.bricks_properties[bomb_index_i][bomb_index_j+1].element.classList.add("empty");
-                        document.querySelector(".game-set").removeChild(bomb_dropped);
-                    }, 3000);
+                
+            var element = document.querySelector('.bomb');
+                    var x = 0;
+
+                function loop() {
+                    element.className = "bomb animation-bomb" +x;
                 }
-                else if(displayed_set.bricks_properties[_this.index_i+1][_this.index_j].breakable == true)
-                {
-                    setTimeout(function()
-                    {
-                        console.log(_this);
-                        displayed_set.bricks_properties[bomb_index_i+1][bomb_index_j].breakable = null;                        //displayed_set.bricks_properties[_this.index_i][_this.index_j+1].classList.remove("breakable");
-                        displayed_set.bricks_properties[bomb_index_i+1][bomb_index_j].element.classList.remove("breakable");
-                        displayed_set.bricks_properties[bomb_index_i+1][bomb_index_j].element.classList.add("empty");
-                        document.querySelector(".game-set").removeChild(bomb_dropped);
-                    }, 3000);
-                }
-            }
-            
-        });
-        
-        
-    }
+
+                var setInterval_player = window.setInterval(function () {
+                    loop()
+                    x++
+                }, 1000);
+
+                window.setTimeout(function () {
+                    clearInterval(setInterval_animation);
+                }, 6000)
+                                };
+                            }); 
+                        }
+                    };
     
-    
-    
-}
+
 
 var player_1 = new player(30, 30, 30);
 player_1.generate_player();

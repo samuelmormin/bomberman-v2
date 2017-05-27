@@ -3,7 +3,7 @@ body
     margin-right 0
     //width 100%
     height 100vh
-    background-image url('/bomberman/assets/img/background.png')
+    background-image url('/bomberman-v2/assets/img/background.png')
     background-position left bottom
     background-repeat no-repeat
     //background-size contain
@@ -19,9 +19,75 @@ body
     z-index 10
     transform translateX(0) translateY(0)
     transition all 0.1s ease-in
-    background-image url('/bomberman-v2/assets/img/avatar.svg')
-    background-size contain
+    background-image url('/bomberman-v2/assets/img/tupac_sheet.svg')
+    background-repeat no-repeat
+    background-position 0px 0px
+    background-size 120px 30px
+
+.animation-left    
+    -webkit-animation animation-left
+    animation-name animation-left
+    background-position -60px
+    animation-iteration-count infinite
     
+    @-webkit-keyframes animation-left
+        0%   
+            background-position 0px
+        25% 
+            background-position -30px
+        50%
+            background-position -60px
+        100%
+            background-position -90px
+
+.animation-right  
+    -webkit-animation animation-right
+    animation-name animation-right
+    background-position -30px
+    animation-iteration-count infinite
+    
+    @-webkit-keyframes animation-left
+        0%   
+            background-position 0px
+        25% 
+            background-position -30px
+        50%
+            background-position -60px
+        100%
+            background-position -90px
+            
+.animation-up  
+    -webkit-animation animation-up
+    animation-name animation-up
+    background-position -90px
+    animation-iteration-count infinite
+    
+    @-webkit-keyframes animation-up
+        0%   
+            background-position 0px
+        25% 
+            background-position -30px
+        50%
+            background-position -60px
+        100%
+            background-position -90px
+
+.animation-down
+    -webkit-animation animation-down
+    animation-name animation-down
+    background-position 0px
+    animation-iteration-count infinite
+    
+    @-webkit-keyframes animation-down
+        0%   
+            background-position 0px
+        25% 
+            background-position -30px
+        50%
+            background-position -60px
+        100%
+            background-position -90px
+                
 .game-set
     display inline-block
     position relative
@@ -85,9 +151,38 @@ body
     left 0
     background-color #5F7292
     transform translateX(0) translateY(0)
-    background-image url('/bomberman-v2/assets/img/bomb.svg')
-    background-size contain
+    background-image url('/bomberman-v2/assets/img/bomb_sheet.svg')
+    background-size 150px 40px
+
+.animation-bomb1
+    background-position 0px
+
+.animation-bomb2
+    background-position -30px
+
+.animation-bomb3
+    background-position -60px
+
+.animation-bomb4
+    background-position -90px
+
+.animation-bomb5
+    background-position -120px
     
+//.animation-bomb 
+//    -webkit-animation animation-bomb
+//    animation-name animation-bomb
+//    animation-duration 0.5s
+//    animation-delay 2.5s
+//    transition all 0.5s linear 
+//    
+//    
+//    @-webkit-keyframes animation-bomb
+//        0%   
+//            background-position 0px
+//        1O0% 
+//            background-position -30px
+        
 .score-set
     position absolute
     width 390px
