@@ -79,20 +79,13 @@ var player = function(posX, posY, index_i, index_j, size)
             }
         });
     }
-    
-    
-    
-    
-    
-    
-    console.log('ok1'); 
+     
     // Drop a bomb
     this.drop_bomb = function()
     {
         // stock the current element
         var _this = this;
-        console.log('ok2');
-        // callback to listen the events
+        
         document.addEventListener("keydown", function()
         {
             // space Key value = 32
@@ -109,29 +102,79 @@ var player = function(posX, posY, index_i, index_j, size)
                 _this.bomb_dropped.push(bomb_dropped);
                 document.querySelector(".game-set").appendChild(bomb_dropped);
                 
+                var x = 0;
                 
-                
-            var element = document.querySelector('.bomb');
-                    var x = 0;
-
-                function loop() {
-                    element.className = "bomb animation-bomb" +x;
+                setTimeout(function()
+                    {
+                    function loop()
+                {
+                    bomb_dropped.className = "bomb animation-bomb" +x;
                 }
 
-                var setInterval_player = window.setInterval(function () {
+                var setInterval_player = window.setInterval(function ()
+                {
                     loop()
                     x++
+                }, 100);
+
+                window.setTimeout(function ()
+                {
+                    clearInterval(setInterval_player);
                 }, 1000);
-
-                window.setTimeout(function () {
-                    clearInterval(setInterval_animation);
-                }, 6000)
-                                };
-                            }); 
-                        }
-                    };
-    
-
+                    }, 3000);
+                
+                // After bomb animation, tests and deletes the walls
+                setTimeout(function()
+                {
+                
+                    // Delete breakable brick to the RIGHT
+                    if(displayed_set.bricks_properties[ bomb_index_i ][ bomb_index_j + 1 ].breakable == true)
+                    {
+                        displayed_set.bricks_properties[ bomb_index_i ][ bomb_index_j + 1 ].breakable = null;
+                        displayed_set.bricks_properties[ bomb_index_i ][ bomb_index_j + 1 ].element.style.opacity = "0";
+                        displayed_set.bricks_properties[ bomb_index_i ][ bomb_index_j + 1 ].element.classList.remove("breakable");
+                        displayed_set.bricks_properties[ bomb_index_i ][ bomb_index_j + 1 ].element.classList.add("empty", "brick-boom");
+                        displayed_set.bricks_properties[ bomb_index_i ][ bomb_index_j + 1 ].element.style.opacity = "1";
+                    }
+                    
+                    // Delete breakable brick to the LEFT
+                    if(displayed_set.bricks_properties[ bomb_index_i ][ bomb_index_j - 1 ].breakable == true)
+                    {
+                        displayed_set.bricks_properties[ bomb_index_i ][ bomb_index_j - 1 ].breakable = null;  
+                        displayed_set.bricks_properties[ bomb_index_i ][ bomb_index_j - 1 ].element.style.opacity = "0";
+                        displayed_set.bricks_properties[ bomb_index_i ][ bomb_index_j - 1 ].element.classList.remove("breakable");
+                        displayed_set.bricks_properties[ bomb_index_i ][ bomb_index_j - 1 ].element.classList.add("empty", "brick-boom");
+                        displayed_set.bricks_properties[ bomb_index_i ][ bomb_index_j - 1 ].element.style.opacity = "1";
+                    }
+                    
+                    // Delete breakable brick to the BOTTOM
+                    if( displayed_set.bricks_properties[ bomb_index_i + 1 ][ bomb_index_j ].breakable == true)
+                    {
+                        displayed_set.bricks_properties[ bomb_index_i + 1 ][ bomb_index_j ].breakable = null;
+                        displayed_set.bricks_properties[ bomb_index_i + 1 ][ bomb_index_j ].element.style.opacity = "0";
+                        displayed_set.bricks_properties[ bomb_index_i + 1 ][ bomb_index_j ].element.classList.remove("breakable");
+                        displayed_set.bricks_properties[ bomb_index_i + 1 ][ bomb_index_j ].element.classList.add("empty", "brick-boom");
+                        displayed_set.bricks_properties[ bomb_index_i + 1 ][ bomb_index_j ].element.style.opacity = "1";
+                    }
+                    
+                    // Delete breakable brick to the TOP
+                    if( displayed_set.bricks_properties[ bomb_index_i - 1 ][ bomb_index_j ].breakable == true)
+                    {
+                        displayed_set.bricks_properties[ bomb_index_i - 1 ][ bomb_index_j ].breakable = null;
+                        displayed_set.bricks_properties[ bomb_index_i - 1 ][ bomb_index_j ].element.style.opacity = "0";
+                        displayed_set.bricks_properties[ bomb_index_i - 1 ][ bomb_index_j ].element.classList.remove("breakable");
+                        displayed_set.bricks_properties[ bomb_index_i + 1 ][ bomb_index_j ].element.classList.add("empty", "brick-boom");
+                        displayed_set.bricks_properties[ bomb_index_i - 1 ][ bomb_index_j ].element.style.opacity = "1";
+                    }
+            
+                    // Delete bomb
+                    document.querySelector(".game-set").removeChild(bomb_dropped);
+                }, 3500);
+                
+            }
+        });
+    }
+}
 
 var player_1 = new player(30, 30, 30);
 player_1.generate_player();

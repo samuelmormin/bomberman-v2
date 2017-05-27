@@ -115,15 +115,14 @@ body
     top 0
     left 0
     background-color #5F7292
-    //transform translateX(0) translateY(0)
-    //background-image url('/bomberman/assets/img/brick.svg')
-    //background-size contain
+    opacity 1
+    transition all 1s ease-in
     
 .set-line
     display block
     position relative
     margin 0 auto
-    background red
+    background #5F7292
     
 .wall
     display inline-block
@@ -141,7 +140,8 @@ body
     //transform translateX(0) translateY(0)
     background-image url('/bomberman-v2/assets/img/breakable.svg')
     background-size contain
-    transition all 0.3s ease-in
+    transition all 1s ease-in
+    opacity 1
     
 .bomb
     position absolute
@@ -169,19 +169,37 @@ body
 .animation-bomb5
     background-position -120px
     
-//.animation-bomb 
-//    -webkit-animation animation-bomb
-//    animation-name animation-bomb
-//    animation-duration 0.5s
-//    animation-delay 2.5s
-//    transition all 0.5s linear 
-//    
-//    
-//    @-webkit-keyframes animation-bomb
-//        0%   
-//            background-position 0px
-//        1O0% 
-//            background-position -30px
+.brick-boom 
+    -webkit-animation brick-boom
+    animation-name brick-boom
+    animation-duration 1s
+    animation-iteration-count 1
+    transition all 0.5s linear
+    background-size auto
+    background-position center center
+    background-repeat no-repeat
+
+@keyframes brick-boom {
+  0% {
+    background-image: url('/bomberman-v2/assets/img/boom.png');
+    opacity 1
+  }
+  25% {
+    background-image: url('/bomberman-v2/assets/img/boom2.png');
+  }
+  50% {
+    background-image: url('/bomberman-v2/assets/img/boom3.png');
+  }
+  75% {
+    background-image: url('/bomberman-v2/assets/img/boom4.png');
+    opacity 0.3
+  }
+  100% {
+    background-image: none;
+  }
+}
+
+
         
 .score-set
     position absolute
