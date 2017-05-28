@@ -7,6 +7,7 @@ var Set = function(size, brick_size)
     //this.columns            = 15;
     //this.wall_size          = width/this.columns;
     
+    this.players              = [];
     this.bricks_properties    = [];
     this.free_way             = [];
     this.breakable_brick      = [];
@@ -92,6 +93,8 @@ var Set = function(size, brick_size)
                 }
             }
         }
+                console.log(this.bricks_properties);
+
     }
     
     // Lists and sets the not walls bricks
@@ -114,7 +117,7 @@ var Set = function(size, brick_size)
     this.set_bricks_to_remove = function()
     {
         this.breakable_brick = this.free_way.slice(3, this.free_way.length-3);
-        console.log(this.breakable_brick);
+        //console.log(this.breakable_brick);
         for( let i = 0 ; i < this.breakable_brick.length ; i++)
         {
             this.breakable_brick[i].breakable = true; 

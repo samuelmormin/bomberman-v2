@@ -4,3 +4,4 @@
 
 <script type="text/javascript" src="<?= URL ?>assets/js/game-set.js"></script>
 <script type="text/javascript" src="<?= URL ?>assets/js/player.js"></script>
+<script type="text/javascript" src="<?= URL ?>assets/js/a_i_player.js"></script>

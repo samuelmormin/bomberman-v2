@@ -8,7 +8,7 @@ var player = function(posX, posY, index_i, index_j, size)
     this.index_j        = 1;
     this.size           = size;
     this.bomb_dropped   = [];
-    this.life           = 3;
+    this.life_count     = 3;
     
     // Creates and displays the player dom element
     this.generate_player = function()
@@ -19,6 +19,7 @@ var player = function(posX, posY, index_i, index_j, size)
         //create_player.style.height = this.posX+"px";
         this.create_player.style.transform = 'translateX('+ displayed_set.bricks_properties[this.index_i][this.index_j].posX +'px) translateY('+ displayed_set.bricks_properties[this.index_i][this.index_j].posY +'px)';
         document.querySelector(".game-set").appendChild(this.create_player);
+        
     }
     
     // Handles the player's moves
@@ -41,6 +42,8 @@ var player = function(posX, posY, index_i, index_j, size)
                 {
                     _this.index_j -= 1;
                     _this.create_player.style.transform = 'translateX('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posX +'px) translateY('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posY +'px)';
+                    _this.posX = displayed_set.bricks_properties[_this.index_i][_this.index_j].posX;
+                    _this.posY = displayed_set.bricks_properties[_this.index_i][_this.index_j].posY;
                     _this.create_player.className = "player animation-left";
                 }
             }
@@ -52,6 +55,8 @@ var player = function(posX, posY, index_i, index_j, size)
                 {
                     _this.index_i -= 1;
                     _this.create_player.style.transform = 'translateX('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posX +'px) translateY('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posY +'px)';
+                    _this.posX = displayed_set.bricks_properties[_this.index_i][_this.index_j].posX;
+                    _this.posY = displayed_set.bricks_properties[_this.index_i][_this.index_j].posY;
                     _this.create_player.className = "player animation-up";
                 }
             }
@@ -63,6 +68,8 @@ var player = function(posX, posY, index_i, index_j, size)
                 {
                     _this.index_j += 1;
                     _this.create_player.style.transform = 'translateX('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posX +'px) translateY('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posY +'px)';
+                    _this.posX = displayed_set.bricks_properties[_this.index_i][_this.index_j].posX;
+                    _this.posY = displayed_set.bricks_properties[_this.index_i][_this.index_j].posY;
                     _this.create_player.className = "player animation-right";
                 }
             }
@@ -74,6 +81,8 @@ var player = function(posX, posY, index_i, index_j, size)
                 {
                     _this.index_i += 1;
                     _this.create_player.style.transform = 'translateX('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posX +'px) translateY('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posY +'px)';
+                    _this.posX = displayed_set.bricks_properties[_this.index_i][_this.index_j].posX;
+                    _this.posY = displayed_set.bricks_properties[_this.index_i][_this.index_j].posY;                    
                     _this.create_player.className = "player animation-down";
                 }
             }
@@ -169,11 +178,34 @@ var player = function(posX, posY, index_i, index_j, size)
             
                     // Delete bomb
                     document.querySelector(".game-set").removeChild(bomb_dropped);
+                    
+                    _this.life_check(_this, bomb_index_i, bomb_index_j);
+
+                    
                 }, 3500);
+                
                 
             }
         });
     }
+    
+    this.life_check = function(current_object, bomb_i, bomb_j)
+    {
+        if(current_object.posX == displayed_set.bricks_properties[ bomb_i ][ bomb_j ].posX && current_object.posY == displayed_set.bricks_properties[ bomb_i ][ bomb_j ].posY)
+        {
+            current_object.life_count -= 1;
+            console.log(current_object.life_count);
+            
+            if(current_object.life_count == 0)
+            {
+                var end_of_game = document.createElement("div");
+                end_of_game.classList.add("end-of-game");
+                end_of_game.innerHTML = "T'AS PERDU PUTEUH";
+                document.querySelector(".game-set").appendChild(end_of_game);
+            }
+        }
+    }
+    
 }
 
 var player_1 = new player(30, 30, 30);
