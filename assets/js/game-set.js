@@ -3,27 +3,13 @@ var Set = function(size, brick_size)
 {
     this.size                 = size;
     this.brick_size           = brick_size;
-    //this.height             = width;
-    //this.columns            = 15;
-    //this.wall_size          = width/this.columns;
-    
+    this.bricks_broken        = 0;
+    this.br
     this.players              = [];
     this.bricks_properties    = [];
     this.free_way             = [];
     this.breakable_brick      = [];
     this.is_item              = [];
-    
-    // This method displays the game set
-//    this.display_set = function()
-//    {
-//        var set_element = document.createElement("div");
-//        set_element.classList.add("game-set");
-//        set_element.style.width = this.width+"px";
-//        set_element.style.height = this.height+"px";
-//        document.body.appendChild(set_element);
-//        wall_sizing = this.wall_size;
-//    }
-
     
     // This method will create the dom elements (game-set, lines, and bricks) and stock the elements properties in walls_properties
     this.generate_game_set = function()
@@ -56,12 +42,10 @@ var Set = function(size, brick_size)
                 {
                     index_i    : i,
                     index_j    : j,
-                    element    : brick, //cette ligne correspons a l'element de chaque cellule ex "div"
+                    element    : brick,
                     breakable  : null, 
-                    item       : null,
                     posX       : posX,
-                    posY       : posY,
-                    value_item : null
+                    posY       : posY
                 });
             }
             
@@ -122,7 +106,9 @@ var Set = function(size, brick_size)
         {
             this.breakable_brick[i].breakable = true; 
             this.breakable_brick[i].element.classList.add("breakable"); 
+            this.breakable_brick
         }
+        console.log(this.breakable_brick.length);
     }
     
     // Apply the methods after instanciation

@@ -9,6 +9,7 @@ var player = function(posX, posY, index_i, index_j, size)
     this.size           = size;
     this.bomb_dropped   = [];
     this.life_count     = 3;
+    this.bricks_broken  = 0;
     
     // Creates and displays the player dom element
     this.generate_player = function()
@@ -19,7 +20,6 @@ var player = function(posX, posY, index_i, index_j, size)
         //create_player.style.height = this.posX+"px";
         this.create_player.style.transform = 'translateX('+ displayed_set.bricks_properties[this.index_i][this.index_j].posX +'px) translateY('+ displayed_set.bricks_properties[this.index_i][this.index_j].posY +'px)';
         document.querySelector(".game-set").appendChild(this.create_player);
-        
     }
     
     // Handles the player's moves
@@ -105,6 +105,7 @@ var player = function(posX, posY, index_i, index_j, size)
             {
                 var bomb_index_i = _this.index_i;
                 var bomb_index_j = _this.index_j;
+                console.log('fuuuuuuck'+bomb_index_j);
                 var bomb_dropped = document.createElement("div");
                 bomb_dropped.className = "bomb animation-bomb";
                 bomb_dropped.style.transform = 'translateX('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posX +'px) translateY('+ displayed_set.bricks_properties[_this.index_i][_this.index_j].posY +'px)';
@@ -189,20 +190,60 @@ var player = function(posX, posY, index_i, index_j, size)
         });
     }
     
-    this.life_check = function(current_object, bomb_i, bomb_j)
+    this.life_check = function(current_object, bomb_i, bomb_j, bricks_broken)
     {
-        if(current_object.posX == displayed_set.bricks_properties[ bomb_i ][ bomb_j ].posX && current_object.posY == displayed_set.bricks_properties[ bomb_i ][ bomb_j ].posY)
+        // if the player is to close from the bomb
+        if(current_object.posX == displayed_set.bricks_properties[ bomb_i ][ bomb_j     ].posX && current_object.posY == displayed_set.bricks_properties[ bomb_i     ][ bomb_j     ].posY ||
+           current_object.posX == displayed_set.bricks_properties[ bomb_i ][ bomb_j     ].posX && current_object.posY == displayed_set.bricks_properties[ bomb_i + 1 ][ bomb_j     ].posY ||
+           current_object.posX == displayed_set.bricks_properties[ bomb_i ][ bomb_j     ].posX && current_object.posY == displayed_set.bricks_properties[ bomb_i - 1 ][ bomb_j     ].posY ||
+           current_object.posX == displayed_set.bricks_properties[ bomb_i ][ bomb_j + 1 ].posX && current_object.posY == displayed_set.bricks_properties[ bomb_i     ][ bomb_j + 1 ].posY ||
+           current_object.posX == displayed_set.bricks_properties[ bomb_i ][ bomb_j - 1 ].posX && current_object.posY == displayed_set.bricks_properties[ bomb_i     ][ bomb_j - 1 ].posY
+          )
         {
             current_object.life_count -= 1;
-            console.log(current_object.life_count);
+            
+            console.log(displayed_set.bricks_properties[ bomb_i     ][ bomb_j+1]);
+            
+            var delete_heart = document.getElementById("lives").children[0];
+            console.log(delete_heart);
+            delete_heart.remove();
             
             if(current_object.life_count == 0)
             {
                 var end_of_game = document.createElement("div");
-                end_of_game.classList.add("end-of-game");
-                end_of_game.innerHTML = "T'AS PERDU PUTEUH";
+                end_of_game.classList.add("end-of-game", "cover-map");
+                end_of_game.innerHTML = "GAME OVER!";
                 document.querySelector(".game-set").appendChild(end_of_game);
+                var end_buttons = document.querySelector(".end-buttons");
+                end_buttons.style.display = "block";
             }
+        }
+        else if((current_object.posX == displayed_set.bricks_properties[ bomb_i ][ bomb_j ].posX) && (current_object.posY == displayed_set.bricks_properties[ bomb_i     ][ bomb_j+1].posY))
+        {
+            current_object.life_count -= 1;
+            
+            var delete_heart = document.getElementById("lives").children[0];
+            console.log(delete_heart);
+            delete_heart.remove();
+            
+            if(current_object.life_count == 0)
+            {
+                var end_of_game = document.createElement("div");
+                end_of_game.classList.add("end-of-game", "cover-map");
+                end_of_game.innerHTML = "GAME OVER!";
+                document.querySelector(".game-set").appendChild(end_of_game);
+                var end_buttons = document.querySelector(".end-buttons");
+                end_buttons.style.display = "block";
+            }
+        }
+        if( bricks_broken == displayed_set.breakable_brick.length )
+        {
+            var end_of_game = document.createElement("div");
+                end_of_game.classList.add("end-of-game", "cover-map");
+                end_of_game.innerHTML = "YOU WON!";
+                document.querySelector(".game-set").appendChild(end_of_game);
+                var end_buttons = document.querySelector(".end-buttons");
+                end_buttons.style.display = "block";
         }
     }
     

@@ -208,26 +208,28 @@ body
     background-color red
     
 .end-of-game
-    font-family arial
     top 0
     left 0
     width 100%
     height 100%
     position absolute
-    background-color #2753e5
+    background-color #5F7292
     z-index 11
     font-size 30px
     line-height 450px
     color white
+    font-family 'Press Start 2P', cursive
     
 #myBtn
+        font-family 'Press Start 2P', cursive
+        font-size 8px
         cursor pointer
         color #fefefe
         background #29abe1
         padding 30px 30px
         line-height 0px
         border-radius 30px
-        left 69px
+        left 55px
         position absolute
         z-index 2
 
@@ -266,18 +268,54 @@ body
 
 .lives
     position absolute
-    display flex
-    margin 10px 35px
+    top 160px
+    width 300px
+    height 50px
+    padding 0px 20px
+    margin 20px 20px
     z-index 1
+    background-color #29abe1
+    border-radius 50px
+    text-align center
     
-    .live1
+    .live
+        display inline-block
+        line-height 50px
         width 50px
-        margin 100px 20px
+        height 50px
 
-    .live2
-        width 50px
-        margin 100px 20px
+.end-buttons
+    display none
+    top 140px
+    left 0
+    width 100%
+    height 60px
+    position absolute
+    z-index 12
+    font-size 12px
+    line-height 450px
+    color white
+    font-family 'Press Start 2P', cursive
+    
+.cover-map 
+    -webkit-animation cover-map
+    animation-name cover-map
+    animation-duration 0.5s
+    animation-iteration-count 1
+    transition all 1s ease
+    background-size auto
+    background-position center center
+    background-repeat no-repeat
 
-    .live3
-        width 50px
-        margin 100px 20px
+@keyframes cover-map {
+  0% {
+    border-radius: 100%;
+    transform: scale(0, 0);
+    opacity 0
+  }
+  100% {
+    border-radius: 0%;
+    transform: scale(1, 1);
+    opacity 1
+  }
+}

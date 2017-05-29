@@ -1,4 +1,3 @@
-<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
 <div class="hero">
     <div class="container">
         <img src="assets/img/logo.png" alt="logo_of_the_game">

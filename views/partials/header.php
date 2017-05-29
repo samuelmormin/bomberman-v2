@@ -6,6 +6,7 @@
     <title>Utveckling.fr</title>
     <link rel="stylesheet" href="<?= URL ?>assets/css/reset.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <link rel="stylesheet" href="<?= URL ?>assets/css/main.css">
     
 </head>
